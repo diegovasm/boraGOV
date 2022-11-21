@@ -1,0 +1,25 @@
+.item-questao{
+    display: flex;
+    border-bottom: 1px solid rgb(224, 224, 224);
+}
+a{
+    text-decoration: none;
+}
+.item-questao:hover{
+    background-color: rgb(255, 252, 248);
+    cursor: pointer;
+}
+.indicadores-questao{
+    font-size: small;
+    color: gray;
+    margin: 0.5vw;
+}
+.resumo-questao{
+    margin: 0.5vw;
+}
+.resumo-questao>h3{
+    color: rgb(34, 85, 143);
+}
+.tags{
+    color: cornflowerblue;
+}

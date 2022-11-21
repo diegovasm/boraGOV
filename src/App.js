@@ -14,7 +14,7 @@ import { Container } from 'react-bootstrap'
 
 function App() {
   
-  const apiUrl = "https://ironrest.herokuapp.com/boraGOV"
+  const apiUrl = "https://ironrest.cyclic.app/boraGOV"
   const [form, setForm] = useState({
     titulo: "",
     problema: "",

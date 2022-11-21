@@ -1,6 +1,8 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { Container, Spinner, Table } from "react-bootstrap"
+import { Link } from "react-router-dom"
+import "./Questoes.css"
 
 export default function Questoes ({apiUrl}){
 
@@ -24,18 +26,26 @@ export default function Questoes ({apiUrl}){
     }, [apiUrl])
 
     const renderQuestoes = questoes.map((questao)=> {
+        const renderTags = questao.tags.map((item, index) => {
+            return (
+                <span  id={index}>{`${item} `}</span>
+            )
+        })
         return (
-            <tr key={questao._id}>
-                <td>{questao.titulo}</td>
-                <td>{questao.problema}</td>
-                <td>{questao.resultadoesperado}</td>
-                <td>{questao.tags}</td>
-                {/* { { <td> }
-                    <Button variant="info" size="sm">
-                        <Link className="nav-link" to={`/funcionarios/${employee._id}`}>Ver detalhes</Link>
-                    </Button>
-                </td> } */}
-            </tr>
+            <Link to={`/detalhes/${questao._id}`} >
+                <div className="item-questao" id={questao._id}>
+                    <div className="indicadores-questao">
+                        <p>{questao.votos} votos</p>
+                        <p>{questao.respostas} respostas</p>
+                        <p>{questao.views} visualizações</p>
+                    </div>
+                    <div className="resumo-questao">
+                        <h3>{questao.titulo}</h3>
+                        <p className="tags"> {renderTags} </p>
+                    </div>
+                </div>
+            </Link>
+           
         )
     })
 
@@ -44,28 +54,7 @@ export default function Questoes ({apiUrl}){
             {isLoading && <Spinner className="mt-4" animation="border" />}
             {!isLoading &&
                 <div>
-                    {/* <Form className="my-4">
-                        <Form.Control
-                            type="search"
-                            placeholder="Procurar funcionário"
-                            value={ search }
-                            onChange={ (e) => setSearch(e.target.value) }
-                        />
-                    </Form> */}
-                    <Table className="mt-4" striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th>Título</th>
-                                <th>Problema</th>
-                                <th>Resultado Esperado</th>
-                                <th>Tags</th>
-                                <th>Ações</th>
-                            </tr>
-                            </thead>
-                         <tbody>
-                            { renderQuestoes }
-                        </tbody>
-                    </Table>
+                    {renderQuestoes}
                 </div>
             }
         </Container>
