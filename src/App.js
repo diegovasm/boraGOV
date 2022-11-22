@@ -1,6 +1,7 @@
 
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 import Questoes from "./components/questoes/Questoes"
 import NavigationBar from "./components/navigationBar/NavigationBar"
 import MenuLateral from "./components/menuLateral/MenuLateral"
