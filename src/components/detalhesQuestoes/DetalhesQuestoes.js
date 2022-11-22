@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
+import "./DetalhesQuestoes.css"
 
 export default function DetalhesQuestoes({ apiUrl }) {
   const [questao, setQuestao] = useState({});
@@ -26,17 +27,23 @@ export default function DetalhesQuestoes({ apiUrl }) {
   }, [id]);
 
   return (
-    <Card className="text-center">
-      <Card.Header>Questão</Card.Header>
+    <Card className="text-center card-detalhe" >
+      <Card.Header as="h4" className="card-header">Questão</Card.Header>
       <Card.Body>
-        <Card.Title>{questao.titulo}</Card.Title>
-        <Card.Text>
+        <Card.Title as="h5" className="det-titulo">{questao.titulo}</Card.Title>
+        <Card.Text  className="det-problema">
             {questao.problema}
         </Card.Text>
-
-        <Button variant="primary">Go somewhere</Button>
+        <Card.Text className="det-mais-info">
+          <p>Data de Cadastro: {questao.datacadastro}<span> &nbsp; &nbsp; &nbsp; </span>Órgão: {questao.orgao}</p>
+          <p>Tags: <span className="det-tags">{questao.tags}</span> </p>
+        </Card.Text>
+        
       </Card.Body>
-      <Card.Footer className="text-muted">2 days ago</Card.Footer>
+      <Card.Footer className="text-muted det-footer">
+        <p><Button variant="primary" className="">Go somewhere</Button></p>
+        <p>2 days ago</p>
+      </Card.Footer>
     </Card>
   );
 }
