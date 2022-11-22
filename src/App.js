@@ -35,16 +35,16 @@ function App() {
       
 
       <NavigationBar/>
-      <Container>
+      <Container className='principal'>
 
         <MenuLateral/>
-        {/* <Routes>
+        <Routes>
           <Route path= "/" element={<Login />}> </Route>
           <Route path= "/questoes" element={<Questoes apiUrl={apiUrl}/>}> </Route>
           <Route path= "/detalhes/:id" element={<DetalhesQuestoes apiUrl={apiUrl} form={form} setForm={setForm}/>}> </Route>
           <Route path= "/cadastrar" element={<CadastrarQuestoes apiUrl={apiUrl} form={form} setForm={setForm}/>}> </Route>
           <Route path= "*" element={<ErrorPage />}> </Route>
-        </Routes> */}
+        </Routes>
 
       </Container>
 
