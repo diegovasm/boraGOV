@@ -8,7 +8,7 @@ export default function Questoes ({apiUrl}){
 
     const [questoes, setQuestoes] = useState([])
     const [isLoading, setIsLoading] = useState(true)
-
+    
     useEffect(() => {
         try {
             const fetchQuestoes = async () => {
@@ -25,29 +25,31 @@ export default function Questoes ({apiUrl}){
         }
     }, [apiUrl])
 
-    const renderQuestoes = questoes.map((questao)=> {
-        const renderTags = questao.tags.map((item, index) => {
+          const renderQuestoes = questoes.map((questao)=> {
+          const renderTags = questao.tags.map((item, index) => {
+                return (
+                    <span  id={index}>{`${item} `}</span>
+                )
+            })
             return (
-                <span  id={index}>{`${item} `}</span>
+                <Link to={`/detalhes/${questao._id}`} >
+                    <div className="item-questao" id={questao._id}>
+                        <div className="indicadores-questao">
+                            <p>{questao.votos} votos</p>
+                            <p>{questao.respostas} respostas</p>
+                            <p>{questao.views} visualizações</p>
+                        </div>
+                        <div className="resumo-questao">
+                            <h3>{questao.titulo}</h3>
+                            <p className="tags"> {renderTags} </p>
+                        </div>
+                    </div>
+                </Link>
+               
             )
         })
-        return (
-            <Link to={`/detalhes/${questao._id}`} >
-                <div className="item-questao" id={questao._id}>
-                    <div className="indicadores-questao">
-                        <p>{questao.votos} votos</p>
-                        <p>{questao.respostas} respostas</p>
-                        <p>{questao.views} visualizações</p>
-                    </div>
-                    <div className="resumo-questao">
-                        <h3>{questao.titulo}</h3>
-                        <p className="tags"> {renderTags} </p>
-                    </div>
-                </div>
-            </Link>
-           
-        )
-    })
+   
+
 
     return (
         <Container className="lista-questoes">
