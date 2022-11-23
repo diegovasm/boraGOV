@@ -1,22 +1,38 @@
-import axios from "axios";
-import { Button, Card, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import axios from "axios"
+import { Button, Card, Form } from "react-bootstrap"
+import { useNavigate } from "react-router-dom"
 
 export default function CadastrarQuestao({ apiUrl, form, setForm }) {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+  const dataatual = new Date()
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const tags = form.tags.toUpperCase().split(" ")
+      form.tags = [...tags]
+      form.datacadastro = dataatual.toLocaleString("pt-BR")
       await axios.post(`${apiUrl}`, form);
+      setForm({
+        titulo: "",
+        problema: "",
+        resultadoesperado: "",
+        tags: [],
+        datacadastro: "",
+        orgao: "",
+        respostas: 0,
+        views: 0,
+        votos:0
+      })
+      navigate('/questoes')
     } catch (error) {
       console.log(error);
     }
-  };
+  }
 
   return (
     <Form className="card-detalhe">
@@ -26,7 +42,7 @@ export default function CadastrarQuestao({ apiUrl, form, setForm }) {
         </Card.Header>
         <Card.Body>
           <Form.Group className="mb-3" controlId="formQuestao">
-            <Form.Label>Título da Questão</Form.Label>
+            <Form.Label>Título da Questão:</Form.Label>
             <Form.Control
               className="det-titulo"
               type="text"
@@ -36,7 +52,7 @@ export default function CadastrarQuestao({ apiUrl, form, setForm }) {
             />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Órgão do Usuário</Form.Label>
+            <Form.Label>Órgão:</Form.Label>
             <Form.Control
               className=""
               type="text"
@@ -46,24 +62,7 @@ export default function CadastrarQuestao({ apiUrl, form, setForm }) {
             />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Tags</Form.Label>
-            <Form.Control
-              className=""
-              type="text"
-              name="tags"
-              placeholder="Adicione uma tag por vez"
-              value={form.tags}
-              onChange={handleChange}
-            />
-            <Button
-              variant="primary"
-              className="btn-salvar"
-              onClick={handleSubmit}
-            >
-              Adicionar tag
-            </Button>
-          </Form.Group>
-          <Form.Group>
+          <Form.Label>Relato da Questão:</Form.Label>
             <Form.Control
               className="det-problema"
               as="textarea"
@@ -74,15 +73,34 @@ export default function CadastrarQuestao({ apiUrl, form, setForm }) {
               onChange={handleChange}
             />
           </Form.Group>
+          <Form.Group>
+          <Form.Label>Resultado Esperado</Form.Label>
+            <Form.Control
+              className="det-problema"
+              as="textarea"
+              rows={5}
+              type="text"
+              name="resultadoesperado"
+              value={form.resultadoesperado}
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Tags:</Form.Label>
+            <Form.Control
+              className=""
+              type="text"
+              name="tags"
+              placeholder="Adicione as tags separadas por um espaço"
+              value={form.tags}
+              onChange={handleChange}
+            />
+          </Form.Group>
 
-          <Card.Text className="det-mais-info">
-            <p>Data de Cadastro: {form.dataCadastro}</p>
-            <p>
-              Tags: <span className="det-tags">{form.tags}</span>{" "}
-            </p>
-          </Card.Text>
-
+        </Card.Body>
+        <Card.Footer className="text-muted det-footer">
           <Button
+            type="submit"
             variant="success"
             className="btn-salvar"
             onClick={handleSubmit}
@@ -96,11 +114,8 @@ export default function CadastrarQuestao({ apiUrl, form, setForm }) {
           >
             Cancelar
           </Button>
-        </Card.Body>
-        <Card.Footer className="text-muted det-footer">
-
         </Card.Footer>
       </Card>
     </Form>
-  );
+  )
 }

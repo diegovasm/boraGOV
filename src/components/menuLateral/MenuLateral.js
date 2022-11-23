@@ -21,7 +21,7 @@ export default function MenuLateral() {
         <CDBSidebarMenu>
           <CDBSidebarMenuItem 
            suffix={
-            <CDBBadge className="badgeTags" color="primary-gradient" size="small" borderType="pill" textColor="white">
+            <CDBBadge className="badgeTags" color="primary-gradient" size="small" borderType="pill" textColor="white" intensity={900}>
                 130
             </CDBBadge>
             }
@@ -31,7 +31,7 @@ export default function MenuLateral() {
           </CDBSidebarMenuItem>
           <CDBSidebarMenuItem 
             suffix={
-            <CDBBadge className="badgeUsers" color="info" size="small" borderType="pill">
+            <CDBBadge className="badgeUsers" color="info" size="small" borderType="pill" intensity={900}>
                 70
             </CDBBadge>
             }
@@ -41,7 +41,7 @@ export default function MenuLateral() {
           </CDBSidebarMenuItem>
           <CDBSidebarMenuItem 
             suffix={
-            <CDBBadge className="badgeOrgaos" color="info" size="small" borderType="pill">
+            <CDBBadge className="badgeOrgaos" color="info" size="small" borderType="pill" intensity={900}>
                 50
             </CDBBadge>
             }
