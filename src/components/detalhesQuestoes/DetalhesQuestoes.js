@@ -5,90 +5,93 @@ import { useNavigate, useParams } from "react-router-dom";
 import "./DetalhesQuestoes.css";
 
 export default function DetalhesQuestoes({ apiUrl }) {
-  const [questao, setQuestao] = useState({});
-  const { id } = useParams();
-  const navigate = useNavigate();
-  let formQuestao = document.querySelectorAll("#formQuestao");
-  let btnAtualizar = document.querySelector(".btn-atualizar");
-  let btnSalvar = document.querySelector(".btn-salvar");
-  let btnExcluir = document.querySelector(".btn-excluir");
-  let btnCancelar = document.querySelector(".btn-cancelar");
-  let btnVoltar = document.querySelector(".btn-voltar");
+  const [questao, setQuestao] = useState({})
+  const { id } = useParams()
+  const navigate = useNavigate()
+  let formQuestao = document.querySelectorAll("#formQuestao")
+  let btnAtualizar = document.querySelector(".btn-atualizar")
+  let btnSalvar = document.querySelector(".btn-salvar")
+  let btnExcluir = document.querySelector(".btn-excluir")
+  let btnCancelar = document.querySelector(".btn-cancelar")
+  let btnVoltar = document.querySelector(".btn-voltar")
 
   useEffect(() => {
     try {
       const fetchQuestao = async () => {
-        const response = await axios.get(`${apiUrl}/${id}`);
-        setQuestao(response.data);
-      };
+        const response = await axios.get(`${apiUrl}/${id}`)
+        setQuestao(response.data)
+      }
 
-      fetchQuestao();
+      fetchQuestao()
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  }, [apiUrl,id]);
+  }, []);
 
   useEffect(() => {
     try {
       const incrementaView = async () => {
-        const clone = questao;
-        delete clone._id;
-        clone.views++;
-        console.log(clone.views);
-        await axios.put(`${apiUrl}/${id}`, clone);
-      };
+        const clone = questao
+        delete clone._id
+        clone.views++
+        await axios.put(`${apiUrl}/${id}`, clone)
+      }
 
-      incrementaView();
+      incrementaView()
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  });
+  },[])
 
-  console.log(formQuestao);
+  console.log(formQuestao)
 
   const atualizar = () => {
     formQuestao.forEach((element) => {
-      element.removeAttribute("disabled");
+      element.removeAttribute("disabled")
     });
-    btnAtualizar.classList.toggle("hide");
-    btnSalvar.classList.toggle("hide");
-    btnExcluir.classList.toggle("hide");
-    btnCancelar.classList.toggle("hide");
-    btnVoltar.classList.toggle("hide");
-  };
+    btnAtualizar.classList.toggle("hide")
+    btnSalvar.classList.toggle("hide")
+    btnExcluir.classList.toggle("hide")
+    btnCancelar.classList.toggle("hide")
+    btnVoltar.classList.toggle("hide")
+  }
 
   const handleChange = (e) => {
-    setQuestao({ ...questao, [e.target.name]: e.target.value });
-  };
+    setQuestao({ ...questao, [e.target.name]: e.target.value })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-      const clone = { ...questao };
-      delete clone._id;
-      await axios.put(`${apiUrl}/${id}`, clone);
+      const clone = { ...questao }
+      delete clone._id
+      await axios.put(`${apiUrl}/${id}`, clone)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
 
     formQuestao.forEach((element) => {
-      element.setAttribute("disabled", "");
-    });
-    btnAtualizar.classList.toggle("hide");
-    btnSalvar.classList.toggle("hide");
-    btnExcluir.classList.toggle("hide");
-    btnCancelar.classList.toggle("hide");
-    btnVoltar.classList.toggle("hide");
+      element.setAttribute("disabled", "")
+    })
+    btnAtualizar.classList.toggle("hide")
+    btnSalvar.classList.toggle("hide")
+    btnExcluir.classList.toggle("hide")
+    btnCancelar.classList.toggle("hide")
+    btnVoltar.classList.toggle("hide")
   };
+
+  const deleteQuestao = async () => {
+    await axios.delete(`${apiUrl}/${id}`)
+    navigate("/questoes")
+  }
 
   return (
     <Form className="card-detalhe">
-    <Card className="text-center">
-      <Card.Header as="h4" className="card-header">
-        Questão
-      </Card.Header>
-      <Card.Body>
-        
+      <Card className="text-center">
+        <Card.Header as="h4" className="card-header">
+          Questão
+        </Card.Header>
+        <Card.Body>
           <Form.Group className="mb-3" controlId="formQuestao">
             <Form.Control
               disabled
@@ -109,17 +112,17 @@ export default function DetalhesQuestoes({ apiUrl }) {
               onChange={handleChange}
             />
           </Form.Group>
-        <Card.Text className="det-mais-info">
-          <p>
-            Data de Cadastro: {questao.datacadastro}
-            <span> &nbsp; &nbsp; &nbsp; </span>Órgão: {questao.orgao}
-          </p>
-          <p>
-            Tags: <span className="det-tags">{questao.tags}</span>{" "}
-          </p>
-        </Card.Text>
+          <Card.Text className="det-mais-info">
+            <p>
+              Data de Cadastro: {questao.datacadastro}
+              <span> &nbsp; &nbsp; &nbsp; </span>Órgão: {questao.orgao}
+            </p>
+            <p>
+              Tags: <span className="det-tags">{questao.tags}</span>{" "}
+            </p>
+          </Card.Text>
 
-        <Button
+          <Button
             variant="success"
             className="btn-salvar hide"
             onClick={handleSubmit}
@@ -133,19 +136,22 @@ export default function DetalhesQuestoes({ apiUrl }) {
           >
             Atualizar
           </Button>
-          <Button variant="danger" className="btn-excluir">
+          <Button
+            variant="danger"
+            className="btn-excluir"
+            onClick={deleteQuestao}
+          >
             Excluir
           </Button>
           <Button
             variant="danger"
             className="btn-cancelar hide"
-            onClick={() => (window.location.reload())}
+            onClick={() => window.location.reload()}
           >
             Cancelar
           </Button>
-
-      </Card.Body>
-      <Card.Footer className="text-muted det-footer">
+        </Card.Body>
+        <Card.Footer className="text-muted det-footer">
           <Button
             variant="primary"
             className="btn-voltar"
@@ -153,8 +159,8 @@ export default function DetalhesQuestoes({ apiUrl }) {
           >
             Voltar
           </Button>
-      </Card.Footer>
-    </Card>
-  </Form>
+        </Card.Footer>
+      </Card>
+    </Form>
   );
 }
