@@ -23,3 +23,18 @@
     font-size: 1.2rem;
 }
 
+.badgeTags{
+
+    background-color: navy;
+    color: white;
+}
+.badgeUsers{
+
+    background-color: orange;
+    color: white;
+}
+.badgeOrgaos{
+
+    background-color: purple;
+    color: white;
+}

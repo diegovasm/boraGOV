@@ -1,7 +1,7 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { Button, Card } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios"
+import { useEffect, useState } from "react"
+import { Button, Card } from "react-bootstrap"
+import { useNavigate, useParams } from "react-router-dom"
 import "./DetalhesQuestoes.css";
 
 export default function DetalhesQuestoes({ apiUrl }) {
