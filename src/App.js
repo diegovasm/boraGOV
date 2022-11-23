@@ -16,12 +16,13 @@ import BuscaQuestoes from './buscaQuestoes/BuscaQuestoes'
 export default function App() {
   
   const apiUrl = "https://ironrest.cyclic.app/boraGOV"
+  const dataatual = new Date()
   const [form, setForm] = useState({
     titulo: "",
     problema: "",
     resultadoEsperado: "",
     tags: [],
-    dataCadastro: "",
+    dataCadastro: dataatual.toLocaleString("pt-BR"),
     orgao: "",
     respostas: 0,
     views: 0,
@@ -35,7 +36,7 @@ export default function App() {
       
 
       <NavigationBar/>
-      <Container>
+      <Container className='principal'>
 
         <MenuLateral/>
         <Routes>
