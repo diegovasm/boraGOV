@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { Container, Spinner, Table } from "react-bootstrap"
+import { Container, Spinner } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import "./Questoes.css"
 
@@ -50,8 +50,8 @@ export default function Questoes ({apiUrl}){
     })
 
     return (
-        <Container>
-            {isLoading && <Spinner className="mt-4" animation="border" />}
+        <Container className="lista-questoes">
+            {isLoading && <div className="questoes-spinner"><Spinner className="mt-4" animation="border" /></div>}
             {!isLoading &&
                 <div>
                     {renderQuestoes}

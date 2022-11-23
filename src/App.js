@@ -16,12 +16,13 @@ import { Container } from 'react-bootstrap'
 function App() {
   
   const apiUrl = "https://ironrest.cyclic.app/boraGOV"
+  const dataatual = new Date()
   const [form, setForm] = useState({
     titulo: "",
     problema: "",
     resultadoEsperado: "",
     tags: [],
-    dataCadastro: "",
+    dataCadastro: dataatual.toLocaleString("pt-BR"),
     orgao: "",
     respostas: 0,
     views: 0,
@@ -35,16 +36,16 @@ function App() {
       
 
       <NavigationBar/>
-      <Container>
+      <Container className='principal'>
 
         <MenuLateral/>
-        {/* <Routes>
+        <Routes>
           <Route path= "/" element={<Login />}> </Route>
           <Route path= "/questoes" element={<Questoes apiUrl={apiUrl}/>}> </Route>
           <Route path= "/detalhes/:id" element={<DetalhesQuestoes apiUrl={apiUrl} form={form} setForm={setForm}/>}> </Route>
           <Route path= "/cadastrar" element={<CadastrarQuestoes apiUrl={apiUrl} form={form} setForm={setForm}/>}> </Route>
           <Route path= "*" element={<ErrorPage />}> </Route>
-        </Routes> */}
+        </Routes>
 
       </Container>
 
