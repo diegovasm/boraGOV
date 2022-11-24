@@ -36,7 +36,7 @@ export default function DetalhesQuestoes({ apiUrl }) {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [apiUrl, id]);
 
   const atualizar = () => {
     formQuestao.forEach((element) => {
