@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 
 export default function CadastrarQuestao({ apiUrl, form, setForm }) {
   const navigate = useNavigate()
+
   const dataatual = new Date()
 
   const handleChange = (e) => {
@@ -11,8 +12,9 @@ export default function CadastrarQuestao({ apiUrl, form, setForm }) {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
+
       const tags = form.tags.toUpperCase().split(" ")
       form.tags = [...tags]
       form.datacadastro = dataatual.toLocaleString("pt-BR")
@@ -29,8 +31,9 @@ export default function CadastrarQuestao({ apiUrl, form, setForm }) {
         votos:0
       })
       navigate('/questoes')
+
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
 

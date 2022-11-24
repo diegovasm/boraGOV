@@ -28,6 +28,8 @@ export default function App() {
     votos:0
   })
 
+  const [login, setLogin] = useState(true)
+
 
   return (
     <div className="App">
@@ -38,11 +40,11 @@ export default function App() {
 
         <MenuLateral/>
         <Routes>
-          <Route path= "/" element={<Login />}> </Route>
+          <Route path= "/" element={<Login apiUrl={apiUrl}/>}> </Route>
           <Route path= "/questoes" element={<Questoes apiUrl={apiUrl}/>}> </Route>
           <Route path= "/detalhes/:id" element={<DetalhesQuestoes apiUrl={apiUrl}/>}> </Route>
           <Route path= "/cadastrar" element={<CadastrarQuestoes apiUrl={apiUrl} form={form} setForm={setForm}/>}> </Route>
-          <Route path= "/questoes/:busca" element={<BuscaQuestoes apiUrl={apiUrl} form={form} setForm={setForm} />}> </Route>
+          <Route path= "/questoes/:busca" element={<BuscaQuestoes apiUrl={apiUrl}/>}> </Route>
           <Route path= "*" element={<ErrorPage />}> </Route>
         </Routes>
 

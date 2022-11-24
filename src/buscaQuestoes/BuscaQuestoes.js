@@ -4,12 +4,12 @@ import { Container, Spinner} from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { useParams } from "react-router-dom";
 
-export default function BuscaQuestoes({apiUrl, search}) {
+export default function BuscaQuestoes({apiUrl}) {
 
     const [questoes, setQuestoes] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const { busca } = useParams()
-    
+
     useEffect(() => {
         try {
             const fetchQuestoes = async () => {
