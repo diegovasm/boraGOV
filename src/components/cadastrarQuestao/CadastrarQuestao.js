@@ -1,22 +1,22 @@
-import axios from "axios";
-import { Button, Card, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import axios from "axios"
+import { Button, Card, Form } from "react-bootstrap"
+import { useNavigate } from "react-router-dom"
 
 export default function CadastrarQuestao({ apiUrl, form, setForm }) {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+    setForm({ ...form, [e.target.name]: e.target.value })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-      await axios.post(`${apiUrl}`, form);
+      await axios.post(`${apiUrl}`, form)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   return (
     <Form className="card-detalhe">
@@ -102,5 +102,5 @@ export default function CadastrarQuestao({ apiUrl, form, setForm }) {
         </Card.Footer>
       </Card>
     </Form>
-  );
+  )
 }
