@@ -30,17 +30,33 @@ export default function App() {
 
   const [login, setLogin] = useState(true)
 
+  if(login){
+    return(
+      <div className="App">  
+        <Container className='principal'>
 
+          <Routes>
+            <Route path= "/" element={<Login setLogin={setLogin}/>}> </Route>
+            <Route path= "/questoes" element={<Questoes apiUrl={apiUrl}/>}> </Route>
+            <Route path= "/detalhes/:id" element={<DetalhesQuestoes apiUrl={apiUrl}/>}> </Route>
+            <Route path= "/cadastrar" element={<CadastrarQuestoes apiUrl={apiUrl} form={form} setForm={setForm}/>}> </Route>
+            <Route path= "/questoes/:busca" element={<BuscaQuestoes apiUrl={apiUrl}/>}> </Route>
+            <Route path= "*" element={<ErrorPage />}> </Route>
+          </Routes>
+
+        </Container>
+      </div>
+    )
+  }
   return (
     <div className="App">
       
 
-      <NavigationBar/>
+      <NavigationBar setLogin={setLogin}/>
       <Container className='principal'>
 
         <MenuLateral/>
         <Routes>
-          <Route path= "/" element={<Login apiUrl={apiUrl}/>}> </Route>
           <Route path= "/questoes" element={<Questoes apiUrl={apiUrl}/>}> </Route>
           <Route path= "/detalhes/:id" element={<DetalhesQuestoes apiUrl={apiUrl}/>}> </Route>
           <Route path= "/cadastrar" element={<CadastrarQuestoes apiUrl={apiUrl} form={form} setForm={setForm}/>}> </Route>

@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
-import { Navigate } from "react-router-dom"
-import { Alert } from "react-bootstrap"
+import { useNavigate } from "react-router-dom"
 
-export default function Login({ apiUrl }) {
+export default function Login({setLogin}) {
+
+  const apiUrlLogin = "https://ironrest.cyclic.app/loginBoraGov"
   const [authMode, setAuthMode] = useState("signin")
-  const navigate = Navigate()
+  const navigate = useNavigate()
   const [usersData, setUsersData] = useState([])
   const [authForm, setAuthForm] = useState({
     fullName: "",
     email: "",
-    password: "",
-  });
+    password: ""
+  })
 
     useEffect(() => {
 
       try {
         const fetchUsersLogin = async () => {
-          const response = await axios.get(apiUrl)
+          const response = await axios.get(apiUrlLogin)
           setUsersData(response.data)
           }
 
@@ -25,29 +26,40 @@ export default function Login({ apiUrl }) {
       } catch (error) {
         console.log(error)
       }
-    }, [apiUrl])
+    }, [apiUrlLogin])
 
   const changeAuthMode = () => {
     setAuthMode(authMode === "signin" ? "signup" : "signin")
   }
 
   const handleOnChange = (e) => {
+    
     setAuthForm({ ...authForm, [e.target.name]: e.target.value })
+    
   }
   const handleOnSubmitSignIn = async (e) => {
     e.preventDefault()
     try{
       const userBase = usersData.filter((user) => {
+        console.log(user.email)
+        console.log(authForm.email)
 
         return (user.email === authForm.email && user.password === authForm.password)
 
       })
-
+      console.log(userBase)
       if(userBase.length !== 0){
-
+        setAuthForm(
+            {
+             fullName: "",
+             email:"",
+             password:""
+            }
+        )
+        setLogin(false)
         navigate("/questoes")
       }else{
-        Alert("Email e Password incorretos.")
+        alert("Email e Password incorretos.")
       }
 
     } catch (error){
@@ -60,15 +72,23 @@ export default function Login({ apiUrl }) {
     e.preventDefault()
     try {
       if(authForm.fullName === ""){
-        Alert("Favor preencher o nome do usuário")
+        alert("Favor preencher o nome do usuário")
       }else if(authForm.email === ""){
-        Alert("Favor preencher o e-mail do usuário")
+        alert("Favor preencher o e-mail do usuário")
 
       }else if(authForm.password.length < 6){
-        Alert("O password deve conter pelo menos 6 dígitos")
+        alert("O password deve conter pelo menos 6 dígitos")
       }else{
-
-        await axios.post(`${apiUrl}`, authForm)
+        await axios.post(`${apiUrlLogin}`, authForm)
+        setAuthMode("signin")
+        setAuthForm(
+          {
+            fullName: "",
+            email:"",
+            password:""
+          }
+          
+        )
       }
     } catch (error) {
       console.log(error)
@@ -78,7 +98,7 @@ export default function Login({ apiUrl }) {
   if (authMode === "signin") {
     return (
       <div className="Auth-form-container">
-        <form className="Auth-form">
+        <form className="Auth-form" >
           <div className="Auth-form-content">
             <h3 className="Auth-form-title">Sign In</h3>
             <div className="text-center">
@@ -89,6 +109,12 @@ export default function Login({ apiUrl }) {
             </div>
             <div className="form-group mt-3">
               <label>Email address</label>
+              <input
+                hidden
+                name="fullName"
+                value={""}
+                onChange={handleOnChange}
+              />
               <input
                 type="email"
                 className="form-control mt-1"
@@ -113,13 +139,13 @@ export default function Login({ apiUrl }) {
               <button
                 type="submit"
                 className="btn btn-primary"
-                onSubmit={handleOnSubmitSignIn}
+                onClick={handleOnSubmitSignIn}
               >
                 Submit
               </button>
             </div>
             <p className="text-center mt-2">
-              Forgot <a href="#">password?</a>
+              Forgot <a href="/">password?</a>
             </p>
           </div>
         </form>
@@ -166,7 +192,7 @@ export default function Login({ apiUrl }) {
                 className="form-control mt-1"
                 placeholder="Password"
                 name="password"
-                value={authForm.fullName}
+                value={authForm.password}
                 onChange={handleOnChange}
               />
             </div>
@@ -174,13 +200,13 @@ export default function Login({ apiUrl }) {
               <button
                 type="submit"
                 className="btn btn-primary"
-                onSubmit={handleOnSubmitSignUp}
+                onClick={handleOnSubmitSignUp}
               >
                 Submit
               </button>
             </div>
             <p className="text-center mt-2">
-              Forgot <a href="#">password?</a>
+              Forgot <a href="/">password?</a>
             </p>
           </div>
         </form>
