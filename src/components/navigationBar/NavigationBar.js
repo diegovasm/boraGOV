@@ -2,13 +2,13 @@ import "./NavigationBar.css"
 import Container from "react-bootstrap/Container"
 import Form from "react-bootstrap/Form"
 import Navbar from "react-bootstrap/Navbar"
-import logo from "../../Images/logo.png"
+import logo from "../../Images/boraGOV.png"
 import Dropdown from "react-bootstrap/Dropdown"
 import { Button, DropdownButton } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
-export default function NavigationBar() {
+export default function NavigationBar({setLogin}) {
   const [search, setSearch] = useState("")
   const navigate = useNavigate()
 
@@ -21,6 +21,10 @@ export default function NavigationBar() {
   }
   const handleOnImageClick = () => {
     navigate(`/questoes`, { replace: true })
+  }
+  const handleLogout = () => {
+    setLogin(true)
+    navigate('/', {replace:true})
   }
 
   useEffect(() => {
@@ -50,9 +54,10 @@ export default function NavigationBar() {
       <Container className="navigationBar" fluid>
         <Navbar.Brand href="#home">
           <img
+            
             alt="BoraGoV logo"
             src={logo}
-            width="120"
+            width="80"
             height="40"
             className="align-top"
             onClick={handleOnImageClick}
@@ -76,7 +81,7 @@ export default function NavigationBar() {
           <Dropdown.Item eventKey="1">Perfil</Dropdown.Item>
           <Dropdown.Item eventKey="2">Configurações</Dropdown.Item>
           <Dropdown.Divider />
-          <Dropdown.Item eventKey="4">Logout</Dropdown.Item>
+          <Dropdown.Item eventKey="4" onClick={handleLogout}>Logout</Dropdown.Item>
         </DropdownButton>
       </Container>
     </Navbar>
