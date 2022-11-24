@@ -16,19 +16,20 @@ import BuscaQuestoes from './buscaQuestoes/BuscaQuestoes'
 export default function App() {
   
   const apiUrl = "https://ironrest.cyclic.app/boraGOV"
-  const dataatual = new Date()
   const [form, setForm] = useState({
     titulo: "",
     problema: "",
-    resultadoEsperado: "",
+    resultadoesperado: "",
     tags: [],
-    dataCadastro: dataatual.toLocaleString("pt-BR"),
+    datacadastro: "",
     orgao: "",
     respostas: 0,
     views: 0,
     votos:0
   })
+
   const [login, setLogin] = useState(true)
+
 
   return (
     <div className="App">
@@ -41,7 +42,7 @@ export default function App() {
         <Routes>
           <Route path= "/" element={<Login apiUrl={apiUrl}/>}> </Route>
           <Route path= "/questoes" element={<Questoes apiUrl={apiUrl}/>}> </Route>
-          <Route path= "/detalhes/:id" element={<DetalhesQuestoes apiUrl={apiUrl} form={form} setForm={setForm}/>}> </Route>
+          <Route path= "/detalhes/:id" element={<DetalhesQuestoes apiUrl={apiUrl}/>}> </Route>
           <Route path= "/cadastrar" element={<CadastrarQuestoes apiUrl={apiUrl} form={form} setForm={setForm}/>}> </Route>
           <Route path= "/questoes/:busca" element={<BuscaQuestoes apiUrl={apiUrl}/>}> </Route>
           <Route path= "*" element={<ErrorPage />}> </Route>
