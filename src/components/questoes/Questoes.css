@@ -10,9 +10,10 @@ a{
     cursor: pointer;
 }
 .indicadores-questao{
-    font-size: 0.5rem;
+    font-size: 0.6rem;
     color: gray;
     margin: 0.5vw;
+    width: 7vw;
 }
 .indicadores-questao>p{
     margin-bottom: 0.5rem;
@@ -20,12 +21,12 @@ a{
 .resumo-questao{
     margin: 0.5vw;
 }
-.resumo-questao>h6{
+.resumo-questao>h5{
     color: rgb(34, 85, 143);
 }
 .tags{
     color: cornflowerblue;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     margin-bottom: 0.5rem;
  
 }
