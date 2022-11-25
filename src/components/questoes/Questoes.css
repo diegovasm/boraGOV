@@ -10,18 +10,24 @@ a{
     cursor: pointer;
 }
 .indicadores-questao{
-    font-size: small;
+    font-size: 0.5rem;
     color: gray;
     margin: 0.5vw;
+}
+.indicadores-questao>p{
+    margin-bottom: 0.5rem;
 }
 .resumo-questao{
     margin: 0.5vw;
 }
-.resumo-questao>h3{
+.resumo-questao>h6{
     color: rgb(34, 85, 143);
 }
 .tags{
     color: cornflowerblue;
+    font-size: 0.7rem;
+    margin-bottom: 0.5rem;
+ 
 }
 .questoes-spinner{
     text-align: center;
