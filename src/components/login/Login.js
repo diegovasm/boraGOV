@@ -41,13 +41,10 @@ export default function Login({setLogin}) {
     e.preventDefault()
     try{
       const userBase = usersData.filter((user) => {
-        console.log(user.email)
-        console.log(authForm.email)
 
         return (user.email === authForm.email && user.password === authForm.password)
 
       })
-      console.log(userBase)
       if(userBase.length !== 0){
         setAuthForm(
             {
