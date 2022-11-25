@@ -35,7 +35,7 @@ export default function Questoes({ apiUrl }) {
             <p>{questao.views} visualizações</p>
           </div>
           <div className="resumo-questao">
-            <h3>{questao.titulo}</h3>
+            <h5>{questao.titulo}</h5>
             <p className="tags"> {renderTags} </p>
           </div>
         </div>

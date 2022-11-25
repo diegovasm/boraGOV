@@ -90,7 +90,7 @@ export default function DetalhesQuestoes({ apiUrl }) {
       )}
       {!isLoading && (
         <Card className="text-center">
-          <Card.Header as="h4" className="card-header">
+          <Card.Header as="h5" className="card-header">
             Questão
           </Card.Header>
           <Card.Body>
@@ -107,7 +107,7 @@ export default function DetalhesQuestoes({ apiUrl }) {
                 disabled
                 className="det-problema formQuestao"
                 as="textarea"
-                rows={10}
+                rows={5}
                 type="text"
                 name="problema"
                 value={questao.problema || ""}
@@ -120,7 +120,7 @@ export default function DetalhesQuestoes({ apiUrl }) {
                 disabled
                 className="det-problema formQuestao"
                 as="textarea"
-                rows={5}
+                rows={3}
                 type="text"
                 name="resultadoesperado"
                 value={questao.resultadoesperado || ""}

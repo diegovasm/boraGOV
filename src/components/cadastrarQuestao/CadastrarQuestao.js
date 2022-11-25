@@ -40,7 +40,7 @@ export default function CadastrarQuestao({ apiUrl, form, setForm }) {
   return (
     <Form className="card-detalhe">
       <Card className="text-center">
-        <Card.Header as="h4" className="card-header">
+        <Card.Header as="h5" className="card-header">
           Questão
         </Card.Header>
         <Card.Body>
@@ -69,7 +69,7 @@ export default function CadastrarQuestao({ apiUrl, form, setForm }) {
             <Form.Control
               className="det-problema"
               as="textarea"
-              rows={10}
+              rows={5}
               type="text"
               name="problema"
               value={form.problema}
@@ -81,7 +81,7 @@ export default function CadastrarQuestao({ apiUrl, form, setForm }) {
             <Form.Control
               className="det-problema"
               as="textarea"
-              rows={5}
+              rows={3}
               type="text"
               name="resultadoesperado"
               value={form.resultadoesperado}
