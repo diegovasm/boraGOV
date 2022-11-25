@@ -9,12 +9,7 @@ export default function DetalhesQuestoes({ apiUrl }) {
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
   const navigate = useNavigate();
-  let formQuestao = document.querySelectorAll("#formQuestao");
-  let btnAtualizar = document.querySelector(".btn-atualizar");
-  let btnSalvar = document.querySelector(".btn-salvar");
-  let btnExcluir = document.querySelector(".btn-excluir");
-  let btnCancelar = document.querySelector(".btn-cancelar");
-  let btnVoltar = document.querySelector(".btn-voltar");
+  const [formularioAtivo, setFormularioAtivo] = useState(false);
 
   const incrementaView = () => {
     const clone = questao;
@@ -38,39 +33,47 @@ export default function DetalhesQuestoes({ apiUrl }) {
     }
   }, [apiUrl, id]);
 
-  const atualizar = () => {
-    formQuestao.forEach((element) => {
-      element.removeAttribute("disabled");
-    });
+
+  const mudaFormulario = () => {
+    let formQuestao = document.querySelectorAll(".formQuestao");
+    let btnAtualizar = document.querySelector(".btn-atualizar");
+    let btnSalvar = document.querySelector(".btn-salvar");
+    let btnExcluir = document.querySelector(".btn-excluir");
+    let btnCancelar = document.querySelector(".btn-cancelar");
+    let btnVoltar = document.querySelector(".btn-voltar");
+
+    if (!formularioAtivo){      
+      formQuestao.forEach((element) => {
+        element.removeAttribute("disabled");
+      });
+    } else {      
+      formQuestao.forEach((element) => {
+        element.setAttribute("disabled", "");
+      });
+    }
     btnAtualizar.classList.toggle("hide");
     btnSalvar.classList.toggle("hide");
     btnExcluir.classList.toggle("hide");
     btnCancelar.classList.toggle("hide");
     btnVoltar.classList.toggle("hide");
+
+    setFormularioAtivo(!formularioAtivo)
   };
 
   const handleChange = (e) => {
     setQuestao({ ...questao, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {   
+    mudaFormulario();
+    e.preventDefault();    
     try {
       const clone = { ...questao };
       delete clone._id;
       await axios.put(`${apiUrl}/${id}`, clone);
     } catch (error) {
       console.log(error);
-    }
-
-    formQuestao.forEach((element) => {
-      element.setAttribute("disabled", "");
-    });
-    btnAtualizar.classList.toggle("hide");
-    btnSalvar.classList.toggle("hide");
-    btnExcluir.classList.toggle("hide");
-    btnCancelar.classList.toggle("hide");
-    btnVoltar.classList.toggle("hide");
+    }   
   };
 
   const deleteQuestao = async () => {
@@ -91,10 +94,10 @@ export default function DetalhesQuestoes({ apiUrl }) {
             Questão
           </Card.Header>
           <Card.Body>
-            <Form.Group className="mb-3" controlId="formQuestao">
+            <Form.Group className="mb-3" controlId="formQuestao1">
               <Form.Control
                 disabled
-                className="det-titulo"
+                className="det-titulo formQuestao"
                 type="text"
                 name="titulo"
                 value={questao.titulo || ""}
@@ -102,7 +105,7 @@ export default function DetalhesQuestoes({ apiUrl }) {
               />
               <Form.Control
                 disabled
-                className="det-problema"
+                className="det-problema formQuestao"
                 as="textarea"
                 rows={10}
                 type="text"
@@ -111,11 +114,11 @@ export default function DetalhesQuestoes({ apiUrl }) {
                 onChange={handleChange}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formQuestao">
+            <Form.Group className="mb-3" controlId="formQuestao2">
               <Form.Label>Resultado Esperado:</Form.Label>
               <Form.Control
                 disabled
-                className="det-problema"
+                className="det-problema formQuestao"
                 as="textarea"
                 rows={5}
                 type="text"
@@ -144,7 +147,7 @@ export default function DetalhesQuestoes({ apiUrl }) {
               <Button
                 variant="primary"
                 className="btn-atualizar"
-                onClick={atualizar}
+                onClick={mudaFormulario}
               >
                 Atualizar
               </Button>
@@ -158,7 +161,7 @@ export default function DetalhesQuestoes({ apiUrl }) {
               <Button
                 variant="danger"
                 className="btn-cancelar hide"
-                onClick={() => window.location.reload()}
+                onClick={()=>navigate(`/questoes/`)}
               >
                 Cancelar
               </Button>
