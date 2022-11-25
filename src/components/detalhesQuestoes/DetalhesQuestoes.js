@@ -31,7 +31,8 @@ export default function DetalhesQuestoes({ apiUrl }) {
     } catch (error) {
       console.log(error);
     }
-  },[apiUrl,id]);
+  }, [apiUrl, id]);
+
 
   const mudaFormulario = () => {
     let formQuestao = document.querySelectorAll(".formQuestao");
