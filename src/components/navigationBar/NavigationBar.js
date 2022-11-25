@@ -52,7 +52,7 @@ export default function NavigationBar({setLogin}) {
   return (
     <Navbar>
       <Container className="navigationBar" fluid>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand>
           <img
             
             alt="BoraGoV logo"
